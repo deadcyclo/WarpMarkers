@@ -88,9 +88,11 @@ said namechange in the WarpMarkers.js file.
 4. Add the following three lines to the `index.html` file in the
 `web_assets` folder your Minecraft Overviewer uses. Add them directly
 before the `</head>` tag:
+
        *`<link rel="stylesheet" type="text/css" href="css/gritter.css" />`
        *`<script type="text/javascript" src="js/jquery.gritter.js"></script>`
        *`<script type="text/javascript" src="WarpMarkers.js"></script>`	
+
 5. In the same file, add `;warpmarkers.init();` to the bodies
 onload. In other words replace
 `<body onload="overviewer.util.initialize()">` with
