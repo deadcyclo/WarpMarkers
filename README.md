@@ -84,6 +84,7 @@ There are no known bugs at the moment.
 Planned
 =======
 
+* If Essentials not running, listen for it instead of just quiting
 * Add permission checking
 * Add files for, an instructions on, using WarpMarkers with Pigmap and perhaps other map software
 * Add support for Warpx0r and other similar plugins
