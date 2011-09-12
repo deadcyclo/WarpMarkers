@@ -1,0 +1,4 @@
+interval: 3000
+outputFile: world/warpmarkers.json
+updateFile: world/warpupdates.json
+updateLife: 50000
