@@ -2,19 +2,19 @@ WarpMarkers Bukkit Plugin
 =========================
 
 This plugin outputs a JSON file containing the locations of Warppoints
-from the [Essentials]{http://ess.khhq.net/wiki/Main_Page} Bukkit
+from the [Essentials](http://ess.khhq.net/wiki/Main_Page) Bukkit
 plugin for use with various Minecraft mapping software. When clicking
 on a marker on the map, the following information is shown: The name
 of the warppoint, who created it, and when, who last used it, and
 when. In addition WarpMarkers shows live messages for any Warppoint
 related event on the map (can be turned off). The project includes all
 of the files needed and installation instructions for the [Minecraft
-Overviewer]{https://github.com/brownan/Minecraft-Overviewer} map
+Overviewer](https://github.com/brownan/Minecraft-Overviewer) map
 generator. The events shown are: warppoint created, warppoint used and
 warppoint deleted.
 
 A live map using WarpMarkers is found at
-[mc.minecraftstuff.net]{http://mc.minecraftstuff.net}
+[mc.minecraftstuff.net](http://mc.minecraftstuff.net)
 
 Installation
 ------------
@@ -115,19 +115,19 @@ Planned
 Building
 --------
 
-1. Unzip the [zip-file]{} or clone the project (`TODO git command
+1. Unzip the [zip-file]() or clone the project (`TODO git command
 here`)
 2. Make a sub-directory named lib
-3. Download the [Craftbukkit]{http://bukkit.org} .jar file and put it in the lib
+3. Download the [Craftbukkit](http://bukkit.org) .jar file and put it in the lib
 directory
 4. If different, rename it to `craftbukkit-0.0.1-SNAPSHOT.jar`
-5. Download the [Essentials]{http://ess.khhq.net/wiki/Main_Page} .jar
+5. Download the [Essentials](http://ess.khhq.net/wiki/Main_Page) .jar
 file and put it in the lib directory
 6. If different, rename it to `Essentials.jar`
-7. Download the [JSON simple]{http://code.google.com/p/json-simple/}
+7. Download the [JSON simple](http://code.google.com/p/json-simple/)
 .jar file and put it in the lib directory
 8. If different, rename it to `json_simple-1.1.jar`
-9. Create a [plugin.yml]{http://wiki.bukkit.org/Plugin_YAML} file for
+9. Create a [plugin.yml](http://wiki.bukkit.org/Plugin_YAML) file for
 the project
 10. In the top directory run `make` (or `make WarpMarkers.jar` or `make
 WarpMarkers.zip`)
@@ -146,17 +146,17 @@ External projects used
 ----------------------
 
 Notifications use
-[gritter]{http://boedesign.com/blog/2009/07/11/growl-for-jquery-gritter}
+[gritter](http://boedesign.com/blog/2009/07/11/growl-for-jquery-gritter)
 jQuery plugin by Jordan Boesch 
 
 The map marker (is from the Map [Icons Collection
-project]{http://mapicons.nicolasmollet.com} by Nicolas Mollet 
+project](http://mapicons.nicolasmollet.com) by Nicolas Mollet 
 
 The WarpMarkers icon warp.jgp is a remake of [this
-image]{http://www.flickr.com/photos/torley/2508514525/in/photostream/}
+image](http://www.flickr.com/photos/torley/2508514525/in/photostream/)
 by Torley Olmstead
 
 The following libraries where also used:
-* [Essentials]{http://ess.khhq.net/wiki/Main_Page}
-* [JSON simple]{http://code.google.com/p/json-simple/}
-* [Craftbukkit]{http://bukkit.org}
+* [Essentials](http://ess.khhq.net/wiki/Main_Page)
+* [JSON simple](http://code.google.com/p/json-simple/)
+* [Craftbukkit](http://bukkit.org)
