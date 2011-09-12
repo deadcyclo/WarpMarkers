@@ -88,6 +88,7 @@ Planned
 * Add permission checking
 * Add files for, an instructions on, using WarpMarkers with Pigmap and perhaps other map software
 * Add support for Warpx0r and other similar plugins
+* Implement /setwarpdiscription (with permissions) that will show on map
 
 Building
 --------
