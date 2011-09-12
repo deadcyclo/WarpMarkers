@@ -19,14 +19,16 @@ A live map using WarpMarkers is found at
 Installation
 ------------
 
-1. Unzip the downloaded zip-file
-2. Put the WarpMarkers.jar file in your plugin folder
-3. Stop and start Minecraft
-4. On first run, WarpMarkers will generate the configuration files
+1. Download the [zip-file]
+(https://github.com/downloads/deadcyclo/WarpMarkers/WarpMarkers.zip) 
+2. Unzip the downloaded zip-file
+3. Put the WarpMarkers.jar file in your plugin folder
+4. Stop and start Minecraft
+5. On first run, WarpMarkers will generate the configuration files
 needed in a folder called `WarpMarkers` in your plugin folder
 containing default values (by default it will output the JSON
 files to `<minecraft_server_working_directory>/world/`
-5. To change see the configuration section below
+6. To change see the configuration section below
 
 Configuration
 -------------
@@ -115,8 +117,9 @@ Planned
 Building
 --------
 
-1. Unzip the [zip-file]() or clone the project (`TODO git command
-here`)
+1. Unzip the
+[zip-file](https://github.com/downloads/deadcyclo/WarpMarkers/WarpMarkers.zip)
+or clone the project (`git clone git@github.com:deadcyclo/WarpMarkers.git`)
 2. Make a sub-directory named lib
 3. Download the [Craftbukkit](http://bukkit.org) .jar file and put it in the lib
 directory
@@ -157,6 +160,7 @@ image](http://www.flickr.com/photos/torley/2508514525/in/photostream/)
 by Torley Olmstead
 
 The following libraries where also used:
+
 * [Essentials](http://ess.khhq.net/wiki/Main_Page)
 * [JSON simple](http://code.google.com/p/json-simple/)
 * [Craftbukkit](http://bukkit.org)
