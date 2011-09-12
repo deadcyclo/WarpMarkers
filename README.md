@@ -1,7 +1,7 @@
 WarpMarkers Bukkit Plugin
 =========================
 
-
+[![Foo](http://dev.bukkit.org/media/images/34/32/WarpMarkers.png)](http://dev.bukkit.org/server-mods/warpmarkers)
 
 This plugin outputs a JSON file containing the locations of Warppoints from the [Essentials](http://ess.khhq.net/wiki/Main_Page) Bukkit plugin for use with various Minecraft mapping software. When clicking on a marker on the map, the following information is shown: The name of the warppoint, who created it, and when, who last used it, and when. In addition WarpMarkers shows live messages for any Warppoint related event on the map (can be turned off). The project includes all of the files needed and installation instructions for the [Minecraft Overviewer](https://github.com/brownan/Minecraft-Overviewer) map generator. The events shown are: warppoint created, warppoint used and warppoint deleted.
 
