@@ -83,9 +83,11 @@ warpupdates.json file is placed in the same folder as your Minecraft
 Overviewer output. Alternatively on GNU/Linux don't edit config.yml,
 make a symlink. If you change the name of the file, you must reflect
 said namechange in the WarpMarkers.js file.
-3. Copy all of the files and folders in the `web_assets` folder to the
+3. Stop Minecraft
+4. Start Minecraft 
+5. Copy all of the files and folders in the `web_assets` folder to the
 `web_assets` folder your Minecraft Overviewer uses.
-4. Add the following three lines to the `index.html` file in the
+6. Add the following three lines to the `index.html` file in the
 `web_assets` folder your Minecraft Overviewer uses. Add them directly
 before the `</head>` tag:
 
@@ -93,11 +95,11 @@ before the `</head>` tag:
        * `<script type="text/javascript" src="js/jquery.gritter.js"></script>`
        * `<script type="text/javascript" src="WarpMarkers.js"></script>`	
 
-5. In the same file, add `;warpmarkers.init();` to the bodies
+7. In the same file, add `;warpmarkers.init();` to the bodies
 onload. In other words replace
 `<body onload="overviewer.util.initialize()">` with
 `<body onload="overviewer.util.initialize();warpmarkers.init();">`
-6. Run Minecraft Overviewer and everything should work
+8. Run Minecraft Overviewer and everything should work
 
 Setup for Pigmap
 ----------------
