@@ -74,13 +74,13 @@ Version history
 ===============
 
 * **September 13 2011 - Version - 1.0.1**
-  * Checks permission before generating events. This avoids false events to be triggered if user doesn't have the correct permissions.
-  * Checks that command has not been disabled in Essentials config before generating events. This avoids false events to be triggered if user tries to use a disabled command.
-  * If Essentials not running, WarpMarkers will now wait for it to (possibly) start sometime in the future, instead of failing with an error message.
-  * Will now suspend and resume when Essentials is disabled and enabled.
+    * Checks permission before generating events. This avoids false events to be triggered if user doesn't have the correct permissions.
+    * Checks that command has not been disabled in Essentials config before generating events. This avoids false events to be triggered if user tries to use a disabled command.
+    * If Essentials not running, WarpMarkers will now wait for it to (possibly) start sometime in the future, instead of failing with an error message.
+    * Will now suspend and resume when Essentials is disabled and enabled.
 
 * **September 12 2011 - Version 1.0.0**
-  * Initial Release
+    * Initial Release
 
 Known bugs
 ==========
