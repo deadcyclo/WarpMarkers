@@ -54,6 +54,7 @@ public class WarpMarkersSignPlayerListener extends PlayerListener {
     public void onPlayerInteract(PlayerInteractEvent event) {
 	/* This checks almost everything in a very messy way. There is no way of checking that the user has enough
 	   currency if the sign isn't free */
+	if (!plugin.isEssentialsRunning()) return;
 	if (plugin.essentialPlugin.getSettings().areSignsDisabled()) return;
 	final Block block = event.getClickedBlock();
 	if (block == null) return;

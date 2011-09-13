@@ -47,6 +47,7 @@ import org.json.simple.JSONObject;
 
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.Warps;
+import com.earth2me.essentials.User;
 
 /**
  * WarpMarkers for Bukkit with Essentials
@@ -56,6 +57,8 @@ import com.earth2me.essentials.Warps;
 
 public class WarpMarkers extends JavaPlugin {
     private final WarpMarkersSignPlayerListener signPlayerListener = new WarpMarkersSignPlayerListener(this);
+    private final WarpMarkersPluginEnabledListener pluginEnabledListener = new WarpMarkersPluginEnabledListener(this);
+    private final WarpMarkersPluginDisabledListener pluginDisabledListener = new WarpMarkersPluginDisabledListener(this);
     private Boolean hasUpdated = true;
     private Boolean previousUpdateWasEmpty = false;
     private PluginDescriptionFile pdfFile;
@@ -64,6 +67,11 @@ public class WarpMarkers extends JavaPlugin {
     private int updateLife = 15000;
     private int timer;
     private String updateFile;
+    private boolean essentialsRunning = false;
+    private boolean hasEssentialsRun = false;
+    private String outputFile;
+    private int interval;
+    private PluginManager pm;
 
     private void fail(String message) {
 	/* TODO: Should we rather listen for plugin on-enable events, and start up 
@@ -76,13 +84,33 @@ public class WarpMarkers extends JavaPlugin {
 	PluginCommand pc = getServer().getPluginCommand(command);
 	if (pc != null) {
 	    if (pc.getPlugin().getDescription().getMain().contains("com.earth2me.essentials")) {	
-	essentialPlugin = (Essentials) pc.getPlugin();
+		essentialPlugin = (Essentials) pc.getPlugin();
 		pc.setExecutor(new WarpMarkersCommandTrap(this, pc.getExecutor(), pc, this));
 		return true;
 	    }
 	}
-	fail("The Essentials plug-in must be installed, enabled and running!");
+	fail("The Essentials plug-in not running. Will listen for it starting later.");
 	return false;
+    }
+
+    protected void enableEssentialsListening() {
+	if (!hasEssentialsRun) {
+	    if (!trapCommand("warp") || !trapCommand("delwarp") || !trapCommand("setwarp")) return;
+	}
+	hasEssentialsRun = true;
+	warpInfo = new WarpMarkersWarpInfo(essentialPlugin.getWarps(),getServer(),getDataFolder(),this);
+	essentialsRunning = true;
+	timer = getServer().getScheduler().scheduleSyncRepeatingTask(this,new WarpMarkersTimerTask(this,outputFile,updateFile), interval, interval);
+    }
+
+    protected void disableEssentialsListening() {
+	essentialsRunning = false;
+	getServer().getScheduler().cancelTask(timer);
+	warpInfo = null;
+    }
+
+    public boolean isEssentialsRunning() {
+	return essentialsRunning;
     }
 
     public void onEnable() {
@@ -101,9 +129,9 @@ public class WarpMarkers extends JavaPlugin {
 	    config.load();
 	}
 	
-	int interval = config.getInt("saveInterval",3000);
+	interval = config.getInt("saveInterval",3000);
 	updateLife = config.getInt("updateLife",15000);
-	String outputFile = config.getString("outputFile","world/warpmarkers.json");
+	outputFile = config.getString("outputFile","world/warpmarkers.json");
 	updateFile = config.getString("updateFile","world/warpupdates.json");
 	
 	//Convert from 1000 ms to 20 ticks-per-second
@@ -122,11 +150,12 @@ public class WarpMarkers extends JavaPlugin {
 	    fail("Unable to create "+updateFile+": "+e.getMessage());
 	}
 
-	if (!trapCommand("warp") || !trapCommand("delwarp") || !trapCommand("setwarp")) return;
-	warpInfo = new WarpMarkersWarpInfo(essentialPlugin.getWarps(),getServer(),getDataFolder(),this);
+	pm = getServer().getPluginManager();
 
-	timer = getServer().getScheduler().scheduleSyncRepeatingTask(this,new WarpMarkersTimerTask(this,outputFile,updateFile), interval, interval);
-	PluginManager pm = getServer().getPluginManager();
+	enableEssentialsListening();
+
+	pm.registerEvent(Event.Type.PLUGIN_ENABLE, pluginEnabledListener, Priority.Normal, this);
+	pm.registerEvent(Event.Type.PLUGIN_DISABLE, pluginDisabledListener, Priority.Normal, this);
 	pm.registerEvent(Event.Type.PLAYER_INTERACT, signPlayerListener, Priority.Normal, this);
 
 	log(Level.INFO, "Loaded "+pdfFile.getName() + " build " + pdfFile.getVersion() + " by Brendan Johan Lee <deadcyclo@vanntett.net>","");
@@ -146,6 +175,7 @@ public class WarpMarkers extends JavaPlugin {
     }
 
     protected void handleSignWarp(String player, String warpname) {
+	if (!hasWarpPermissions(getServer().getPlayer(player), null, warpname)) return;
 	hasUpdated = warpInfo.touch("accessed", warpname, player);
 	if (hasUpdated)	log(Level.INFO, warpname+" accessed by sign");
     }
@@ -164,9 +194,9 @@ public class WarpMarkers extends JavaPlugin {
     }
 
     private boolean matchCommand(String name, String commandLabel) {
-	if (commandLabel.equalsIgnoreCase(name)) return true;
+	if (commandLabel.equalsIgnoreCase(name)) return !essentialPlugin.getSettings().isCommandDisabled(name);
 	for (Iterator<String> aliases = getServer().getPluginCommand(name).getAliases().iterator(); aliases.hasNext(); ) {
-	    if (commandLabel.equalsIgnoreCase(aliases.next())) return true;
+	    if (commandLabel.equalsIgnoreCase(aliases.next())) return !essentialPlugin.getSettings().isCommandDisabled(name);
 	}
 	return false;
     }
@@ -175,6 +205,7 @@ public class WarpMarkers extends JavaPlugin {
 	/* Since allready deleted we cannot check if exists or not */
 	if (args.length > 0) {
 	    try {
+		if (!hasPermissions((Player) sender, "essentials.delwarp")) return false;
 		warpInfo.del(args[0], ((Player) sender).getName());
 	    } catch (java.lang.ClassCastException e) {
 		/* Still need to update */
@@ -187,6 +218,7 @@ public class WarpMarkers extends JavaPlugin {
     private boolean cmdSetWarp(CommandSender sender, String[] args) {
 	if (args.length > 0) {
 	    try {
+		if (!hasPermissions((Player) sender, "essentials.setwarp")) return false;
 		return warpInfo.touch("created", args[0], ((Player) sender).getName());
 	    } catch (java.lang.ClassCastException e) {
 		return false;
@@ -197,24 +229,41 @@ public class WarpMarkers extends JavaPlugin {
 
     private boolean cmdWarp(CommandSender sender, String[] args) {
 	if (args.length > 0) {
-	    String warpee = null;
-	    if (args.length < 2) { 
-		try {
-		    warpee = ((Player) sender).getName();
-		} catch (java.lang.ClassCastException e) {
-		    warpee = "System";
-		}
-	    } else { /* System or admin warped a different user */
-		Player player = getServer().getPlayer(args[1]);
-		if (player == null) return false; 
-		if (!player.isOnline()) return false;
-		warpee = player.getName();
+	    Player warpee = null;
+	    Player warper = null;
+	    try {
+		warpee = ((Player) sender);
+	    } catch (java.lang.ClassCastException e) {
+		return false; /* System cannot warp as of now */
 	    }
-	    if (warpee!=null && !warpee.equals("System")) { /* Only inline players can use warp as of now */
-		return warpInfo.touch("accessed", args[0], warpee);
+	    if (args.length > 1) { /* user warped a different user */
+		warper = warpee;
+		warpee = getServer().getPlayer(args[1]);
+		if (warpee == null) return false; 
+		if (!warpee.isOnline()) return false;
+	    }
+	    if (warpee!=null) { 
+		if (!hasWarpPermissions(warpee, warper, args[0])) return false;
+		return warpInfo.touch("accessed", args[0], warpee.getName());
 	    }
 	}
 	return false;
+    }
+
+    protected boolean hasPermissions(Player player, String permission) {
+	User user = essentialPlugin.getUser(player);
+	return user.isAuthorized(permission);
+    }
+
+    protected boolean hasWarpPermissions(Player warpee, Player warper, String warp) {
+	if (warper!=null) {
+	    if (!hasPermissions(warper, "essentials.warp.otherplayers")) return false;
+	}
+	if (essentialPlugin.getSettings().getPerWarpPermission()) {
+	    if (!hasPermissions(warpee, "essentials.warp."+warp)) return false;
+	}
+	if (!hasPermissions(warpee, "essentials.warp")) return false;
+	return true;
     }
 	
     protected JSONArray getJSON() {
@@ -224,6 +273,7 @@ public class WarpMarkers extends JavaPlugin {
     }
 
     protected JSONArray getUpdatesJSON() {
+	if (warpInfo==null) return null; /* Essentials has been disabled */
 	JSONArray result = warpInfo.getUpdates(updateLife);
 	if (result.isEmpty()) {
 	    if (previousUpdateWasEmpty) return null;

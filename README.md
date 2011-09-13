@@ -73,13 +73,19 @@ TODO. Coming soon.
 Version history
 ===============
 
-* **September 12 2011 - Version 1.0**
-  Initial Release
+* **September 13 2011 - Version - 1.0.1**
+  * Checks permission before generating events. This avoids false events to be triggered if user doesn't have the correct permissions.
+  * Checks that command has not been disabled in Essentials config before generating events. This avoids false events to be triggered if user tries to use a disabled command.
+  * If Essentials not running, WarpMarkers will now wait for it to (possibly) start sometime in the future, instead of failing with an error message.
+  * Will now suspend and resume when Essentials is disabled and enabled.
+
+* **September 12 2011 - Version 1.0.0**
+  * Initial Release
 
 Known bugs
 ==========
 
-There are no known bugs at the moment.
+* We have no way of knowing if we get the event when a player interacts with a sign before or after the Essentials plugin. This means that we cannot check if the user has enough credits *if* the warp-sign costs credits to use. This can lead to false events being showed on the map when a user without enough credits clicks on the sign. 
 
 Planned
 =======
