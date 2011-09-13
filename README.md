@@ -10,7 +10,7 @@ A live map using WarpMarkers is found at [mc.minecraftstuff.net](http://mc.minec
 Resources
 ---------
 
-* [Latest stable release](https://github.com/downloads/deadcyclo/WarpMarkers/WarpMarkers.zip)
+* [Latest stable release](https://github.com/downloads/deadcyclo/WarpMarkers/WarpMarkers-1.0.1.zip)
 * [Bukkit dev page](http://dev.bukkit.org/server-mods/warpmarkers/)
 * [Github](https://github.com/deadcyclo/WarpMarkers)
 * [Issue Tracker](https://github.com/deadcyclo/WarpMarkers/issues)
