@@ -123,7 +123,7 @@ External projects used
 
 Notifications use [gritter](http://boedesign.com/blog/2009/07/11/growl-for-jquery-gritter) jQuery plugin by Jordan Boesch 
 
-The map marker (is from the Map [Icons Collection project](http://mapicons.nicolasmollet.com) by Nicolas Mollet
+The map marker (cropcircles.png) is from the Map [Icons Collection project](http://mapicons.nicolasmollet.com) by Nicolas Mollet
 
 The WarpMarkers icon warp.jgp is a remake of [this image](http://www.flickr.com/photos/torley/2508514525/in/photostream/) by Torley Olmstead
 
