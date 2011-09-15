@@ -10,7 +10,7 @@ A live map using WarpMarkers is found at [mc.minecraftstuff.net](http://mc.minec
 Resources
 ---------
 
-* [Latest stable release](https://github.com/downloads/deadcyclo/WarpMarkers/WarpMarkers-1.0.1.zip)
+* [Latest stable release](https://github.com/downloads/deadcyclo/WarpMarkers/WarpMarkers-1.0.2.zip)
 * [Bukkit dev page](http://dev.bukkit.org/server-mods/warpmarkers/)
 * [Github](https://github.com/deadcyclo/WarpMarkers)
 * [Issue Tracker](https://github.com/deadcyclo/WarpMarkers/issues)
@@ -19,7 +19,7 @@ Resources
 Installation
 ------------
 
-1. Download the [zip-file](https://github.com/downloads/deadcyclo/WarpMarkers/WarpMarkers.zip) 
+1. Download the [zip-file](https://github.com/downloads/deadcyclo/WarpMarkers/WarpMarkers-1.0.2.zip) 
 2. Unzip the downloaded zip-file
 3. Put the WarpMarkers.jar file in your plugin folder
 4. Stop and start Minecraft
@@ -100,7 +100,7 @@ Planned
 Building
 --------
 
-1. Unzip the [zip-file](https://github.com/downloads/deadcyclo/WarpMarkers/WarpMarkers.zip) or clone the project (`git clone git@github.com:deadcyclo/WarpMarkers.git`)
+1. Unzip the [zip-file](https://github.com/downloads/deadcyclo/WarpMarkers/WarpMarkers-1.0.2.zip) or clone the project (`git clone git@github.com:deadcyclo/WarpMarkers.git`)
 2. Make a sub-directory named lib 
 3. Download the [Craftbukkit](http://bukkit.org) .jar file and put it in the lib directory
 4. If different, rename it to `craftbukkit-0.0.1-SNAPSHOT.jar`
