@@ -73,6 +73,9 @@ TODO. Coming soon.
 Version history
 ===============
 
+* **September 15 2011 - Version - 1.0.2**
+    * Bug fix: WarpMarkers still unloaded if Essentials not running on start up instead of listening for Essentials.
+
 * **September 13 2011 - Version - 1.0.1**
     * Checks permission before generating events. This avoids false events to be triggered if user doesn't have the correct permissions.
     * Checks that command has not been disabled in Essentials config before generating events. This avoids false events to be triggered if user tries to use a disabled command.

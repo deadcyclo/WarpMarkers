@@ -74,8 +74,6 @@ public class WarpMarkers extends JavaPlugin {
     private PluginManager pm;
 
     private void fail(String message) {
-	/* TODO: Should we rather listen for plugin on-enable events, and start up 
-	   if Essentials is enabled later rather than just giving up? */
 	log(Level.SEVERE, message);
 	getServer().getPluginManager().disablePlugin(this);
     }
@@ -89,7 +87,7 @@ public class WarpMarkers extends JavaPlugin {
 		return true;
 	    }
 	}
-	fail("The Essentials plug-in not running. Will listen for it starting later.");
+	log(Level.INFO, "The Essentials plug-in not running. Will listen for it starting later.");
 	return false;
     }
 
