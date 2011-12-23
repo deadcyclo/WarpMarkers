@@ -32,6 +32,7 @@ var warpmarkers = {
     'on_by_default': true, /* Should warppoints be shown on the map  by default, or only when user pushes the button */
     'warpmarkers_file': "warpmarkers.json", /*The location of the main warpmarkers json file*/
     'warpupdates_file': "warpupdates.json", /*The location of the warpmarkers updates json file*/
+    'world' : '', /*The name of the world that warps should be displayed for. Leave blank for all worlds.*/
 
     /* End configuration options */
 
@@ -47,7 +48,7 @@ var warpmarkers = {
 	    dataType: 'json',
 	    success: function(data) {
 		$.each(data, function(key, val) {
-		    if (warpmarkers.warps[val.name] == undefined) {
+		    if (warpmarkers.warps[val.name] == undefined && (val.world == warpmarkers.world || warpmarkers.world == '')) {
 			var image = new google.maps.MarkerImage(warpmarkers.marker_image,
 								new google.maps.Size(32.0, 37.0),
 	 							new google.maps.Point(0, 0),
