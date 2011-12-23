@@ -70,7 +70,12 @@ var warpmarkers = {
 	 		warpmarkers.warps[val.name].setPosition(loc);
 	 		warpmarkers.warps[val.name].setMap(overviewer.map);
 	 		google.maps.event.addListener(warpmarkers.warps[val.name], 'click', function() {
-	 		    warpmarkers.info_windows[val.name].open(overviewer.map);
+	 		    if(warpmarkers.info_windows[val.name].getMap()){
+				warpmarkers.info_windows[val.name].close();
+			    }
+			    else {
+				warpmarkers.info_windows[val.name].open(overviewer.map);
+			    }
 	 		});
 	 	    }
 		});
